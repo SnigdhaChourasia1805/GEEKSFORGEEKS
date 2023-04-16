@@ -1,0 +1,57 @@
+class Solution {
+ public:
+    long long solve(int num, vector<int> &arr1, vector<int> &arr2)
+    {
+        long long int Sum1=0,Sum2=0,ans=0;
+        for(int i=0;i<num;++i)
+        {
+            Sum1+=arr1[i];
+            Sum2+=arr2[i];
+        }
+        if(Sum1!=Sum2)
+        {
+           return -1;
+        }
+        sort(arr1.begin(),arr1.end());
+        sort(arr2.begin(),arr2.end());
+        vector<int> X,Y,Z,P;
+        for(int i=0;i<num;++i)
+        {
+            if(arr1[i]%2==0)
+            {
+               X.push_back(arr1[i]);
+            }
+            else
+            {
+               Y.push_back(arr1[i]);
+            }
+            if(arr2[i]%2==0)
+            {
+               Z.push_back(arr2[i]);
+            }
+            else
+            {
+               P.push_back(arr2[i]);
+            }
+        }
+        if(X.size()!=Z.size() || Y.size()!=P.size())
+        {
+           return -1;
+        }
+        for(int i=0;i<X.size();++i)
+        {
+          ans+=abs(X[i]-Z[i]);
+        }
+        for(int i=0;i<Y.size();++i)
+        {
+          ans+=abs(Y[i]-P[i]);
+        }
+        if(ans%4!=0)
+        {
+            return -1;
+        }
+        
+        return ans/4;
+       
+    }
+};
